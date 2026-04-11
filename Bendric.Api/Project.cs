@@ -37,13 +37,13 @@ namespace Bendric.Api
         public Version Version { get; set; }
         public ProjectType Type { get; set; }
         public CxxVersion CxxVersion { get; set; }
-        public List<string> Headers { get; set; }
-        public List<string> Sources { get; set; }
-        public List<string> SharedHeaders { get; set; }
-        public List<Dependency> Dependencies { get; set; }
-        public List<string> Defines { get; set; }
-        public List<string> IncludeDirectories { get; set; }
-        public List<string> LibraryDirectories { get; set; }
+        public AdvList<string> Headers { get; set; }
+        public AdvList<string> Sources { get; set; }
+        public AdvList<string> SharedHeaders { get; set; }
+        public AdvList<Dependency> Dependencies { get; set; }
+        public AdvList<string> Defines { get; set; }
+        public AdvList<string> IncludeDirectories { get; set; }
+        public AdvList<string> LibraryDirectories { get; set; }
         public Guid Guid { get; set; }
 
         private string _workingDirectory;
@@ -55,14 +55,14 @@ namespace Bendric.Api
             Version = new Version(1, 0, 0);
             Type = ProjectType.Executable;
             CxxVersion = CxxVersion.Default;
-            Headers = new List<string>();
-            Sources = new List<string>();
-            SharedHeaders = new List<string>();
-            Dependencies = new List<Dependency>();
-            Defines = new List<string>();
+            Headers = new AdvList<string>();
+            Sources = new AdvList<string>();
+            SharedHeaders = new AdvList<string>();
+            Dependencies = new AdvList<Dependency>();
+            Defines = new AdvList<string>();
             Guid = System.Guid.NewGuid();
-            IncludeDirectories = new List<string>();
-            LibraryDirectories = new List<string>();
+            IncludeDirectories = new AdvList<string>();
+            LibraryDirectories = new AdvList<string>();
             _workingDirectory = Directory.GetCurrentDirectory();
         }
 
@@ -109,6 +109,11 @@ namespace Bendric.Api
             string vcxprojPath = Path.Combine(_workingDirectory, $"{Name}.vcxproj");
             VcxprojGenerator vcxprojGen = new VcxprojGenerator(this, vcxprojPath);
             vcxprojGen.Generate();
+
+            // Generate .vcxproj.filters for solution explorer tree structure
+            string filtersPath = Path.Combine(_workingDirectory, $"{Name}.vcxproj.filters");
+            VcxprojFiltersGenerator filtersGen = new VcxprojFiltersGenerator(this, filtersPath, _workingDirectory);
+            filtersGen.Generate();
 
             // Generate .sln
             string slnPath = Path.Combine(_workingDirectory, $"{Name}.sln");

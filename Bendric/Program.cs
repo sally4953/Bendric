@@ -103,7 +103,7 @@ namespace Bendric
 ----------------------------------------------");
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine(" C/C++ Build System - Version 1.0.0");
+            Console.WriteLine(" C/C++ Build System - Version 0.2.0");
             Console.WriteLine();
             Console.ForegroundColor = originalColor;
         }

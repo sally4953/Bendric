@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdvList.cs" />
     <Compile Include="BuildConfig.cs" />
     <Compile Include="Dependency.cs" />
     <Compile Include="GitHelper.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SolutionGenerator.cs" />
+    <Compile Include="VcxprojFiltersGenerator.cs" />
     <Compile Include="VcxprojGenerator.cs" />
     <Compile Include="Version.cs" />
   </ItemGroup>
